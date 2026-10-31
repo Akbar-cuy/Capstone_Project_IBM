@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task List</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind custom config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50:  "#eff6ff",
+                100: "#dbeafe",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+              },
+              accent: {
+                400: "#fb923c",
+                500: "#f97316",
+                600: "#ea580c",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/contoh/style.css" />
+  </head>
+
+  <body class="min-h-screen bg-gradient-to-br from-primary-50 via-white to-blue-50 flex items-start justify-center py-10 px-4">
+
+    <main class="w-full max-w-lg">
+
+      <!-- ── Header ── -->
+      <header class="mb-8 text-center">
+        <div class="inline-flex items-center gap-2 mb-1">
+          <!-- Checkmark icon -->
+          <span class="flex items-center justify-center w-9 h-9 rounded-xl bg-primary-500 shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </span>
+          <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">Task List</h1>
+        </div>
+        <p class="text-sm text-gray-400 mt-1">Stay organised, stay productive.</p>
+      </header>
+
+      <!-- ── Add Task Card ── -->
+      <section aria-label="Add new task" class="card mb-5">
+        <form id="taskForm" class="flex gap-3" novalidate>
+          <input
+            id="taskInput"
+            type="text"
+            placeholder="Add a new task…"
+            maxlength="120"
+            autocomplete="off"
+            class="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
+                   placeholder-gray-400 outline-none transition
+                   focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
+          />
+          <button
+            type="submit"
+            class="btn-primary flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Add
+          </button>
+        </form>
+        <!-- Inline validation message -->
+        <p id="formError" class="hidden mt-2 text-xs text-red-500 pl-1">Please enter a task first.</p>
+      </section>
+
+      <!-- ── Filter Tabs ── -->
+      <nav aria-label="Filter tasks" class="flex gap-2 mb-4">
+        <button data-filter="all"       class="filter-btn filter-active">All</button>
+        <button data-filter="active"    class="filter-btn">Active</button>
+        <button data-filter="completed" class="filter-btn">Completed</button>
+      </nav>
+
+      <!-- ── Task List ── -->
+      <section aria-label="Task list">
+        <ul id="taskList" class="space-y-3">
+          <!-- Tasks are rendered here by script.js -->
+        </ul>
+
+        <!-- Empty state -->
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-16 text-center">
+          <span class="text-5xl mb-3">📋</span>
+          <p class="text-gray-400 text-sm">No tasks here yet. Add one above!</p>
+        </div>
+      </section>
+
+      <!-- ── Footer Summary ── -->
+      <footer class="mt-6 flex items-center justify-between text-xs text-gray-400 px-1">
+        <span id="taskCount">0 task(s) left</span>
+        <button id="clearCompleted"
+          class="hidden text-accent-500 hover:text-accent-600 font-medium transition-colors duration-150">
+          Clear completed
+        </button>
+      </footer>
+
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-box">
+        <h2 id="modalTitle" class="text-base font-bold text-gray-800 mb-4">Edit Task</h2>
+        <input
+          id="editInput"
+          type="text"
+          maxlength="120"
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700
+                 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-100 mb-4"
+        />
+        <div class="flex gap-3 justify-end">
+          <button id="cancelEdit" class="btn-ghost text-sm px-4 py-2">Cancel</button>
+          <button id="saveEdit"   class="btn-primary text-sm px-5 py-2">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="contoh/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,226 @@
+/* =============================================
+   style.css — Task List custom styles
+   Supplements Tailwind utility classes.
+   ============================================= */
+
+/* ── Smooth global transitions ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ── Card container ── */
+.card {
+  background: #ffffff;
+  border-radius: 1rem;          /* rounded-2xl */
+  border: 1px solid #e5e7eb;   /* border-gray-200 */
+  padding: 1.25rem;
+  box-shadow: 0 2px 12px 0 rgba(59, 130, 246, 0.07);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px 0 rgba(59, 130, 246, 0.12);
+}
+
+/* ── Primary button ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;       /* rounded-xl */
+  background-color: #3b82f6;   /* primary-500 */
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 8px 0 rgba(59, 130, 246, 0.35);
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;   /* primary-600 */
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.45);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* ── Ghost button ── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background-color: transparent;
+  color: #6b7280;              /* text-gray-500 */
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background-color: #f3f4f6;  /* gray-100 */
+  color: #374151;
+}
+
+/* ── Filter buttons ── */
+.filter-btn {
+  flex: 1;
+  padding: 0.5rem 0;
+  border-radius: 0.75rem;
+  font-size: 0.8125rem;        /* ~13px */
+  font-weight: 500;
+  color: #6b7280;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-btn:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.filter-btn.filter-active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 2px 8px 0 rgba(59, 130, 246, 0.30);
+}
+
+/* ── Task item ── */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+}
+
+.task-item:hover {
+  box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.10);
+  transform: translateY(-1px);
+}
+
+/* Completed task styling */
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: #9ca3af;              /* text-gray-400 */
+}
+
+.task-item.completed {
+  opacity: 0.75;
+}
+
+/* ── Custom checkbox ── */
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  min-width: 1.2rem;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  position: relative;
+}
+
+.task-checkbox:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+/* Checkmark for checked state via SVG background */
+.task-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ── Icon action buttons (edit / delete) ── */
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.625rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.btn-edit {
+  color: #3b82f6;
+}
+.btn-edit:hover {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.btn-delete {
+  color: #f87171;
+}
+.btn-delete:hover {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+/* ── Modal overlay ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.15s ease;
+}
+
+.modal-box {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+/* ── Utility: hidden but flex when shown ── */
+.flex-show {
+  display: flex !important;
+}
+
+/* ── Scrollbar styling (webkit) ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
